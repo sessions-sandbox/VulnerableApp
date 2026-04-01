@@ -49,11 +49,16 @@ sonarqube {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+tasks.withType(JavaCompile).configureEach {
+    options.debug = true
+    options.debugOptions.debugLevel = 'source,lines,vars'
+}
+
 spotless {
     java {
         // Don't enforce the license, just the format.
         clearSteps()
-        googleJavaFormat().aosp()
+        googleJavaFormat('1.17.0').aosp()
     }
     format 'javascript', {
     	target 'src/main/resources/**/*.js'
